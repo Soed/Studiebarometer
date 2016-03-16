@@ -1,16 +1,19 @@
-package nl.soco.imtpmd.studiebarometer.Models;
+package nl.soco.imtpmd.studiebarometer.model;
 
-/**
- * Created by Collin on 16-3-2016.
- */
 public class Account {
 
+    private String name = "";
     private String username = "";
     private String password = "";
 
-    public Account(String username, String password){
+    public Account(String name, String username, String password){
+        this.name = name;
         this.username = username;
         this.password = password;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public String getUsername() {
@@ -19,6 +22,10 @@ public class Account {
 
     public String getPassword() {
         return password;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setUsername(String username) {
