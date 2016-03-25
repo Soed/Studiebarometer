@@ -28,12 +28,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(
+/*        db.execSQL(
                     "CREATE TABLE " + DatabaseInfo.CourseTables.COURSE + " (" +
                     BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     DatabaseInfo.CourseColumn.NAME + " TEXT," + DatabaseInfo.CourseColumn.ECTS + " TEXT," +
                     DatabaseInfo.CourseColumn.CODE + " TEXT," + DatabaseInfo.CourseColumn.GRADE + " TEXT);"
-        );
+        );*/
     }
 
     @Override

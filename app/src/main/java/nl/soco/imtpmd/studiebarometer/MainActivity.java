@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TabHost;
 import android.widget.TextView;
 
@@ -18,9 +17,6 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -68,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         insertButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, InsertActivity.class));
+                startActivity(new Intent(MainActivity.this,InsertActivity.class));
             }
         });
 
@@ -108,55 +104,5 @@ public class MainActivity extends AppCompatActivity {
                 requestQueue.add(jsonObjectRequest);
             }
         });
-    }
-
-    public static class InsertActivity extends AppCompatActivity {
-
-        Button insertButton;
-        EditText voornaamField;
-        EditText achternaamField;
-        EditText emailField;
-        RequestQueue requestQueue;
-        String insertUrl = "http://collinwoerde.nl/schoolApp/insert.php";
-
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_insert);
-
-            insertButton = (Button) findViewById(R.id.sendButton);
-            voornaamField = (EditText) findViewById(R.id.voornaamField);
-            achternaamField = (EditText) findViewById(R.id.achternaamField);
-            emailField = (EditText) findViewById(R.id.emailField);
-            requestQueue = Volley.newRequestQueue(getApplicationContext());
-
-            insertButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                     StringRequest stringRequest = new StringRequest(Request.Method.POST, insertUrl, new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                        }
-                    }, new Response.ErrorListener() {
-                         @Override
-                         public void onErrorResponse(VolleyError error) {
-
-                         }
-                     }){
-                         @Override
-                     protected Map<String, String> getParams() {
-                             Map<String, String> params = new HashMap<String, String>();
-                             params.put("user_voornaam", voornaamField.getText().toString());
-                             params.put("user_achternaam", achternaamField.getText().toString());
-                             params.put("user_email", emailField.getText().toString());
-                             params.put("user_id","");
-                             return params;
-                         }
-                    };requestQueue.add(stringRequest);
-                finish();
-                }
-            });
-
-        }
     }
 }
