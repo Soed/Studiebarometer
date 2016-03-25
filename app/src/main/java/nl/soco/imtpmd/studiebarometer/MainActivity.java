@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
                                 String email = user.getString("user_email");
                                 String create_date = user.getString("user_create_date");
 
-                                tv.append(create_date + "\n" + voornaam + "\n" + achternaam + "\n" + email + "\n" + "\n");
+                                tv.append(create_date + "\n" + voornaam + " " + achternaam + "\n" + email + "\n\n");
 
                             }
 
