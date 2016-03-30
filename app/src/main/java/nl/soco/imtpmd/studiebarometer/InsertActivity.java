@@ -23,6 +23,8 @@ public class InsertActivity extends AppCompatActivity {
     EditText achternaamField;
     EditText emailField;
     RequestQueue requestQueue;
+
+    //String insertUrl = "http://127.0.0.1/AndroidApi/insert.php";
     String insertUrl = "http://collinwoerde.nl/schoolApp/insert.php";
 
     @Override
