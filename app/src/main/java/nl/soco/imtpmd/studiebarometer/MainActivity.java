@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     Button getButton, insertButton;
 
     RequestQueue requestQueue;
+    //String getUrl = "http://127.0.0.1/AndroidApi/showUsers.php";
     String getUrl = "http://collinwoerde.nl/schoolApp/showUsers.php";
 
     @Override
