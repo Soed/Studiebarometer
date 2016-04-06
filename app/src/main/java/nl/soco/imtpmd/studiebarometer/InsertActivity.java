@@ -54,10 +54,10 @@ public class InsertActivity extends AppCompatActivity {
                      @Override
                  protected Map<String, String> getParams() {
                          Map<String, String> params = new HashMap<String, String>();
-                         params.put("user_voornaam", voornaamField.getText().toString());
-                         params.put("user_achternaam", achternaamField.getText().toString());
-                         params.put("user_email", emailField.getText().toString());
-                         params.put("user_id","");
+                         params.put("voornaam", voornaamField.getText().toString());
+                         params.put("achternaam", achternaamField.getText().toString());
+                         params.put("email", emailField.getText().toString());
+                         params.put("id","");
                          return params;
                      }
                 };requestQueue.add(stringRequest);
