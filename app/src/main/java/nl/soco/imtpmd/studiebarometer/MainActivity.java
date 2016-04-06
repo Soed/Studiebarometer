@@ -19,9 +19,9 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
-
+    //test
     TextView tv;
-    Button getButton, insertButton;
+    Button getButton, insertButton, getHomescreenButton;
 
     RequestQueue requestQueue;
     //String getUrl = "http://127.0.0.1/AndroidApi/showUsers.php";
@@ -65,10 +65,9 @@ public class MainActivity extends AppCompatActivity {
         insertButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,InsertActivity.class));
+                startActivity(new Intent(MainActivity.this, InsertActivity.class));
             }
         });
-
 
         getButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,5 +104,10 @@ public class MainActivity extends AppCompatActivity {
                 requestQueue.add(jsonObjectRequest);
             }
         });
+    }
+
+    public void homescreen(View view) {
+        Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+        startActivity(intent);
     }
 }
