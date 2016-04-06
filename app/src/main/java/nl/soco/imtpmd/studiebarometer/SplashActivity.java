@@ -14,10 +14,14 @@ public class SplashActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_splash);
 
+        getSupportActionBar().hide();
+
+
         Thread myThread = new Thread() {
             public void run() {
+
                 try {
-                    getSupportActionBar().hide();
+
                     sleep(2500);
                     Intent startMainScreen = new Intent(getApplicationContext(),MainActivity.class);
                     startActivity(startMainScreen);
@@ -28,6 +32,5 @@ public class SplashActivity extends AppCompatActivity {
             }
         };
         myThread.start();
-
     }
 }

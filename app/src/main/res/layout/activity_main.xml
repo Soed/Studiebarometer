@@ -25,7 +25,7 @@
         android:id="@+id/getHomescreenButton"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:onClick="homescreen"/>
+        android:onClick="openHomescreen"/>
 
     <LinearLayout
         android:layout_width="match_parent"

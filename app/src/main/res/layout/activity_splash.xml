@@ -9,7 +9,6 @@
         android:layout_height="fill_parent"
         android:src="@drawable/image_splashscreen"
         android:id="@+id/imageView"
-        android:theme="@style/Theme.AppCompat.NoActionBar"
         android:scaleType = "centerCrop">
 
     </ImageView>

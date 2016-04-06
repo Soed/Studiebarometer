@@ -3,6 +3,7 @@ package nl.soco.imtpmd.studiebarometer;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TabHost;
@@ -21,7 +22,7 @@ import org.json.JSONObject;
 public class MainActivity extends AppCompatActivity {
     //test
     TextView tv;
-    Button getButton, insertButton, getHomescreenButton;
+    Button getButton, insertButton;
 
     RequestQueue requestQueue;
     //String getUrl = "http://127.0.0.1/AndroidApi/showUsers.php";
@@ -106,7 +107,8 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void homescreen(View view) {
+    public void openHomescreen(View view) {
+        Log.d("log data: ", "Deze method wordt goed aangeroepen.");
         Intent intent = new Intent(MainActivity.this, HomeActivity.class);
         startActivity(intent);
     }
