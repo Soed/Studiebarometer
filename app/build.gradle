@@ -24,5 +24,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.2.0'
     compile 'com.mcxiaoke.volley:library:1.0.19'
-    compile 'org.quanqi:mpandroidchart:1.7.5'
+    compile 'com.github.PhilJay:MPAndroidChart:v2.1.5'
+
+
 }
