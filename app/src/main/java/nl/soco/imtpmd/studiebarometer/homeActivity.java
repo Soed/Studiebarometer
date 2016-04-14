@@ -64,11 +64,11 @@ public class HomeActivity extends AppCompatActivity {
         if (currentEcts <10) {
             colors.add(Color.rgb(244,81,30));
         } else if (currentEcts < 40){
-            colors.add(Color.rgb(235,0,0));
+            colors.add(Color.rgb(194,58,58));//rood
         } else if  (currentEcts < 50) {
-            colors.add(Color.rgb(253,216,53));
+            colors.add(Color.rgb(219,201,47));//oranje
         } else {
-            colors.add(Color.rgb(67,160,71));
+            colors.add(Color.rgb(144,191,73));//groen
         }
         colors.add(Color.rgb(255,0,0));
 
