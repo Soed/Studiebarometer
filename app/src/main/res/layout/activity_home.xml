@@ -7,10 +7,25 @@
     android:layout_gravity="center_horizontal">
     tools:context=".HomeActivity">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/welkom"
+        android:id="@+id/txtWelkom"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:textSize="14sp"
+        android:textColor="@color/abc_primary_text_material_light" />
+
     <com.github.mikephil.charting.charts.PieChart
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/chart" >
+        android:layout_height="180dp"
+        android:id="@+id/chart"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_below="@+id/txtWelkom"
+        android:layout_marginTop="16dp">
     </com.github.mikephil.charting.charts.PieChart>
 
     <Button
@@ -24,5 +39,17 @@
         android:layout_marginRight="63dp"
         android:layout_marginEnd="63dp"
         android:layout_marginBottom="56dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtAdvies"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:textSize="14sp"
+        android:layout_below="@+id/chart"
+        android:text="@string/advies"
+        android:textColor="@color/abc_primary_text_material_light" />
 
 </RelativeLayout>
