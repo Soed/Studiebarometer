@@ -19,7 +19,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:ems="10"
-        android:hint="Email" />
+        android:hint="E-mail" />
 
     <EditText
         android:id="@+id/etPassword"
@@ -31,7 +31,7 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/etEmail"
         android:ems="10"
-        android:hint="Password"
+        android:hint="Wachtwoord"
         android:inputType="textPassword" />
 
     <Button
@@ -43,13 +43,13 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/etPassword"
-        android:text="Login" />
+        android:text="@string/inloggen" />
 
     <Button
         android:id="@+id/bRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Register"
+        android:text="@string/registreren"
         android:layout_below="@+id/bLogin"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"

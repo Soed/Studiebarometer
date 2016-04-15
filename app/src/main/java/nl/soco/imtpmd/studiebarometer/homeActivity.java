@@ -60,10 +60,10 @@ public class HomeActivity extends AppCompatActivity {
 
         setData(currentEcts, disabledEcts, unknownEcts);
 
-        Button fab = (Button) findViewById(R.id.plusTweeTest);
-        fab.setVisibility(View.GONE);
+        //Button fab = (Button) findViewById(R.id.plusTweeTest);
+        //fab.setVisibility(View.GONE);
 
- /*       Button fab = (Button) findViewById(R.id.plusTweeTest);
+        Button fab = (Button) findViewById(R.id.plusTweeTest);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,7 +81,7 @@ public class HomeActivity extends AppCompatActivity {
                 setWelkomTxt();
                 setAdviesTxt();
             }
-        }); */
+        });
     }
 
     private void setData(int current, int disabled, int unknown) {
@@ -151,6 +151,12 @@ public class HomeActivity extends AppCompatActivity {
 
         advies.setText(adviesTxt);
 
+    }
+
+    public void openPeriodScreen(View view) {
+        Log.d("log data: ", "Deze method wordt goed aangeroepen.");
+        Intent intent = new Intent(HomeActivity.this, MainActivity.class);
+        startActivity(intent);
     }
 }
 

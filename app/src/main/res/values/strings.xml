@@ -3,6 +3,9 @@
     <string name="welkom">Welkom bij de Studiebarometer app van HSL</string>
     <string name="advies">Download het exitformulier <u>hier!</u></string>
 
+    <string name="inloggen">Inloggen</string>
+    <string name="registreren">Registreren</string>
+
     <string name="bsa_failed">BSA niet gehaald, helaas :(</string>
     <string name="bsa_message_warning">Kans op BSA, kijk uit!</string>
     <string name="bsa_warning_no_second_year">Eerste jaar opnieuw doen?</string>
