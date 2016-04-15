@@ -110,9 +110,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Snackbar sb = Snackbar.make(findViewById(android.R.id.content), "Started", Snackbar.LENGTH_LONG);
-        sb.show();
-
     }
 
     public void openHomescreen(View view) {

@@ -8,7 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -75,7 +77,8 @@ public class LoginActivity extends AppCompatActivity {
                 };
 
                 LoginRequest loginRequest = new LoginRequest(email, password, responseListener);
-
+                RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
+                queue.add(loginRequest);
             }
         });
 

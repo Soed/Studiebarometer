@@ -1,5 +1,6 @@
 package nl.soco.imtpmd.studiebarometer;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -35,6 +36,9 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        Intent intent = getIntent();
+        naam = intent.getStringExtra("user_name");
 
         // De teksten vinden
         welkom = (TextView) findViewById(R.id.txtWelkom);
