@@ -9,7 +9,8 @@ public class DatabaseInfo {
     public class CourseColumn {
         public static final String NAME = "NAME";
         public static final String ECTS = "ECTS";
-        public static final String GRADE = "grade";
-        public static final String PERIOD = "period";
+        public static final String GRADE = "GRADE";
+        public static final String PERIOD = "PERIOD";
+        public static final String CODE = "CODE";
     }
 }
