@@ -81,6 +81,16 @@
                             android:layout_alignParentLeft="true"
                             android:layout_alignParentStart="true" />
 
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Test"
+                            android:id="@+id/bSignin"
+                            android:layout_above="@+id/getButton"
+                            android:layout_centerHorizontal="true"
+                            android:onClick="openLogin"
+                            android:layout_marginBottom="54dp" />
+
                     </RelativeLayout>
 
                     <RelativeLayout

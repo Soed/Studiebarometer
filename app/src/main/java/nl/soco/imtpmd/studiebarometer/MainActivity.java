@@ -1,11 +1,13 @@
 package nl.soco.imtpmd.studiebarometer;
 
 import android.content.Intent;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TabHost;
 import android.widget.TextView;
 
@@ -18,6 +20,8 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import nl.soco.imtpmd.studiebarometer.Models.CourseModel;
 
 public class MainActivity extends AppCompatActivity {
     //test
@@ -105,6 +109,10 @@ public class MainActivity extends AppCompatActivity {
                 requestQueue.add(jsonObjectRequest);
             }
         });
+
+        Snackbar sb = Snackbar.make(findViewById(android.R.id.content), "Started", Snackbar.LENGTH_LONG);
+        sb.show();
+
     }
 
     public void openHomescreen(View view) {
@@ -112,4 +120,10 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, HomeActivity.class);
         startActivity(intent);
     }
+
+    public void openLogin(View view) {
+        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        startActivity(intent);
+    }
+
 }
