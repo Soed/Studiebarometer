@@ -11,4 +11,10 @@
     <string name="bsa_warning_no_second_year">Eerste jaar opnieuw doen?</string>
     <string name="bsa_warning_second_year">BSA gehaald en naar het tweede jaar!</string>
     <string name="bsa_warning_passed">BSA gehaald en Propedeuse binnen!</string>
+    <string name="title_activity_home">HomeActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
 </resources>
