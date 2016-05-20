@@ -1,10 +1,13 @@
 package nl.soco.imtpmd.studiebarometer;
 
 import android.content.Intent;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TabHost;
 import android.widget.TextView;
 
@@ -18,8 +21,10 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class MainActivity extends AppCompatActivity {
+import nl.soco.imtpmd.studiebarometer.Models.CourseModel;
 
+public class MainActivity extends AppCompatActivity {
+    //test
     TextView tv;
     Button getButton, insertButton;
 
@@ -33,8 +38,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         tv = (TextView) findViewById(R.id.textView);
-        getButton = (Button) findViewById(R.id.getButton);
-        insertButton = (Button) findViewById(R.id.insertButton);
 
         TabHost tabHost = (TabHost) findViewById(R.id.tabHost);
 
@@ -62,48 +65,12 @@ public class MainActivity extends AppCompatActivity {
 
         requestQueue = Volley.newRequestQueue(getApplicationContext());
 
-        insertButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,InsertActivity.class));
-            }
-        });
-
-
-        getButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, getUrl, (String) null, new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            JSONArray users = response.getJSONArray("users");
-                            tv.setText("");
-
-                            for (int i = 0; i < users.length(); i++) {
-                                JSONObject user = users.getJSONObject(i);
-
-                                String voornaam = user.getString("user_voornaam");
-                                String achternaam = user.getString("user_achternaam");
-                                String email = user.getString("user_email");
-                                String create_date = user.getString("user_create_date");
-
-                                tv.append(create_date + "\n" + voornaam + " " + achternaam + "\n" + email + "\n\n");
-
-                            }
-
-                        } catch (Exception e) {
-
-                        }
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-
-                    }
-                });
-                requestQueue.add(jsonObjectRequest);
-            }
-        });
     }
+
+    public void openHomescreen(View view) {
+        Log.d("log data: ", "Deze method wordt goed aangeroepen.");
+        Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+        startActivity(intent);
+    }
+
 }

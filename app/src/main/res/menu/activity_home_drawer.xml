@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home_layout"
+            android:icon="@drawable/ic_home"
+            android:title="Home" />
+        <item
+            android:id="@+id/nav_second_layout"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Second Layout" />
+        <item
+            android:id="@+id/nav_third_layout"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Third Layout" />
+    </group>
+
+    <item android:title="Account">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_account"
+                android:title="Uitloggen" />
+        </menu>
+    </item>
+
+</menu>
