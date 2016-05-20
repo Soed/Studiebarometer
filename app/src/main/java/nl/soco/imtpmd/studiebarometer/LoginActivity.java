@@ -1,12 +1,16 @@
 package nl.soco.imtpmd.studiebarometer;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -16,6 +20,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class LoginActivity extends AppCompatActivity {
+    private static final String DEFAULT = "N/A";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +59,8 @@ public class LoginActivity extends AppCompatActivity {
 
                             if (success){
                                 String name = jsonResponse.getString("user_name");
+                                //String ww = jsonResponse.getString("user_p");
+                                saveUser(name);
 
                                 Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                                 intent.putExtra("user_name", name);
@@ -83,5 +90,29 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    private void saveUser(String name) {
+        SharedPreferences sharedPreferences = getSharedPreferences("MyData", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("gebruiker_id", 0);
+        editor.putString("gebruiker_naam", name);
+        //editor.putString("gebruiker_ww", ww);
+        editor.commit();
+
+        Toast.makeText(this, "Naam succesvol opgeslagen!", Toast.LENGTH_LONG).show();
+    }
+
+    private void ophalenNaam() {
+        SharedPreferences sharedPreferences = getSharedPreferences("MyData", Context.MODE_PRIVATE);
+        String name = sharedPreferences.getString("gebruiker_naam", DEFAULT);
+        if (!name.equals(DEFAULT)) {
+            Log.d("Log data: ", "Test naam"+ name);
+            //gebruiker.setNaam(name);
+            //toonNaamDialog(); // TODO nog weghalen....
+           // welkom.setText("Welkom bij de Planning Poker app " + gebruiker.getNaam() + "!");
+        } else {
+
+        }
     }
 }
