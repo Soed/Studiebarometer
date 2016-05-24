@@ -1,11 +1,16 @@
 package nl.soco.imtpmd.studiebarometer;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.Nullable;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
@@ -13,14 +18,12 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 
-import android.util.Log;
-import android.widget.TextView;
-
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
 
-public class HomeOLDActivity extends AppCompatActivity {
+public class OverviewFragment extends Fragment {
+
     private PieChart mChart;
     public String naam;
     public static final int MAX_ECTS = 60;
@@ -32,23 +35,23 @@ public class HomeOLDActivity extends AppCompatActivity {
     TextView welkom;
     TextView advies;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+    View myView;
 
-        Intent intent = getIntent();
-        naam = intent.getStringExtra("user_name");
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        myView = inflater.inflate(R.layout.overview_layout, container, false);
 
         // De teksten vinden
-        welkom = (TextView) findViewById(R.id.txtWelkom);
-        advies = (TextView) findViewById(R.id.txtAdvies);
+        welkom = (TextView) myView.findViewById(R.id.txtWelkom);
+        advies = (TextView) myView.findViewById(R.id.txtAdvies);
         // De teksten wijzigen
         setWelkomTxt();
         setAdviesTxt();
 
+
         //De piechart instellen
-        mChart = (PieChart) findViewById(R.id.chart);
+        mChart = (PieChart) myView.findViewById(R.id.chart);
         mChart.setDescription("");
         mChart.setTouchEnabled(true);
         mChart.setDrawSliceText(false);
@@ -63,7 +66,7 @@ public class HomeOLDActivity extends AppCompatActivity {
         //Button fab = (Button) findViewById(R.id.plusTweeTest);
         //fab.setVisibility(View.GONE);
 
-        Button fab = (Button) findViewById(R.id.plusTweeTest);
+        Button fab = (Button) myView.findViewById(R.id.plusTweeTest);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -82,7 +85,11 @@ public class HomeOLDActivity extends AppCompatActivity {
                 setAdviesTxt();
             }
         });
+
+
+        return myView;
     }
+
 
     private void setData(int current, int disabled, int unknown) {
         currentEcts = current;
@@ -120,7 +127,7 @@ public class HomeOLDActivity extends AppCompatActivity {
         //Log.d("Log Data: ", " het uur: "+hour);
 
         if (hour >= 12 && hour < 18) {
-            welkomTxt = "Goedemiddag " + naam + " , welkom bij de Studiebarometer app van HSL.";
+            welkomTxt = "Goedemiddag " + naam + ", welkom bij de Studiebarometer app van HSL.";
         } else if (hour >= 18 && hour < 24) {
             welkomTxt = "Goedenavond " + naam + ", welkom bij de Studiebarometer app van HSL.";
         } else {
@@ -155,8 +162,10 @@ public class HomeOLDActivity extends AppCompatActivity {
 
     public void openPeriodScreen(View view) {
         Log.d("log data: ", "Deze method wordt goed aangeroepen.");
-        Intent intent = new Intent(HomeOLDActivity.this, MainActivity.class);
+        //Intent intent = new Intent(OverviewFragment.this, PeriodFragment.class);
+        //startActivity(intent);
+        Intent intent = new Intent(getActivity(), PeriodFragment.class);
         startActivity(intent);
     }
-}
 
+}
