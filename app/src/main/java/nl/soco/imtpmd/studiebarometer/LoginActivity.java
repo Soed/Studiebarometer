@@ -62,7 +62,7 @@ public class LoginActivity extends AppCompatActivity {
                                 //String ww = jsonResponse.getString("user_p");
                                 saveUser(name);
 
-                                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 intent.putExtra("user_name", name);
 
                                 LoginActivity.this.startActivity(intent);
