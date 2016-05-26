@@ -42,6 +42,8 @@ public class OverviewFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.overview_layout, container, false);
 
+        naam = MainActivity.user.getName();
+
         // De teksten vinden
         welkom = (TextView) myView.findViewById(R.id.txtWelkom);
         advies = (TextView) myView.findViewById(R.id.txtAdvies);
@@ -85,7 +87,6 @@ public class OverviewFragment extends Fragment {
                 setAdviesTxt();
             }
         });
-
 
         return myView;
     }
@@ -158,14 +159,6 @@ public class OverviewFragment extends Fragment {
 
         advies.setText(adviesTxt);
 
-    }
-
-    public void openPeriodScreen(View view) {
-        Log.d("log data: ", "Deze method wordt goed aangeroepen.");
-        //Intent intent = new Intent(OverviewFragment.this, PeriodFragment.class);
-        //startActivity(intent);
-        Intent intent = new Intent(getActivity(), PeriodFragment.class);
-        startActivity(intent);
     }
 
 }
