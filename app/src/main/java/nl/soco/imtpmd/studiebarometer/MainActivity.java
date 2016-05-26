@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,18 +30,17 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import android.widget.TextView;
+
 
 import nl.soco.imtpmd.studiebarometer.Models.UserModel;
 import nl.soco.imtpmd.studiebarometer.Models.CourseModel;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     public String naam;
-    String JSON_STRING;
-    String json_string;
-    JSONObject jsonObject;
-    JSONArray jsonArray;
-    CourseAdapter courseAdapter;
+    private String JSON_STRING;
+    private String json_string;
+    private JSONArray jsonArray;
+    private CourseAdapter courseAdapter;
     ListView listView;
     public static UserModel user = new UserModel();
 
@@ -53,8 +53,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
@@ -62,43 +61,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
         View v = navigationView.getHeaderView(0);
-        TextView name = (TextView ) v.findViewById(R.id.nameMenuTxt);
-        TextView email = (TextView ) v.findViewById(R.id.emailMenuTxt);
+        TextView name = (TextView) v.findViewById(R.id.nameMenuTxt);
+        TextView email = (TextView) v.findViewById(R.id.emailMenuTxt);
 
         name.setText(user.getName());
         email.setText(user.getEmail());
 
         navigationView.getMenu().getItem(0).setChecked(true);
         onNavigationItemSelected(navigationView.getMenu().getItem(0));
-
-        listView = (ListView)findViewById(R.id.listview);
-
-        courseAdapter = new CourseAdapter(this, R.layout.courses_layout);
-        //TODO hier onder verder...
-        //listView.setAdapter(courseAdapter);
-        try {
-            jsonObject = new JSONObject(json_string);
-            jsonArray = jsonObject.getJSONArray("");
-            int count = 0;
-            String CourseName;
-            int ects, grade, period;
-            while (count<jsonArray.length()) {
-                JSONObject JO = jsonArray.getJSONObject(count);
-                CourseName = JO.getString("name");
-                ects = JO.getInt("ects");
-                grade = JO.getInt("grade");
-                period = JO.getInt("period");
-                CourseModel courseModel = new CourseModel(CourseName, ects, grade, period);
-                courseAdapter.add(courseModel);
-                count++;
-            }
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (NullPointerException e){
-            //TODO nullpointer verhelpen...
-        }
-
     }
 
     @Override
@@ -165,13 +135,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-    private void logout(){
-        Log.d("Log data:", "Terug naar loginscherm etc.. naam:" + user.getName() + ".. email:" + user.getEmail());
+    private void logout() {
+        //Login pagina openen en de geschiedenis van de "Terug" knop wissen
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 
-    public void getJSON (View view){
+    public void getJSON(View view) {
         new BackgroundTask().execute();
     }
 
@@ -188,13 +159,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         protected String doInBackground(Void... params) {
             try {
                 URL url = new URL(json_url);
-                HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 InputStream inputStream = httpURLConnection.getInputStream();
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
                 StringBuilder stringBuilder = new StringBuilder();
 
-                while ((JSON_STRING = bufferedReader.readLine())!=null ) {
-                    stringBuilder.append(JSON_STRING+"\n");
+                while ((JSON_STRING = bufferedReader.readLine()) != null) {
+                    stringBuilder.append(JSON_STRING + "\n");
                 }
 
                 bufferedReader.close();
@@ -217,19 +188,48 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         @Override
         protected void onPostExecute(String result) {
-            TextView textView = (TextView)findViewById(R.id.textView5);
-            textView.setText(result);
+            //TextView textView = (TextView) findViewById(R.id.textView5);
+            //textView.setText(result);
             json_string = result;
         }
     }
 
-    public void parseJSON (View view) {
-        if (json_string==null){
-            Toast.makeText(getApplicationContext(),"First Get JSON", Toast.LENGTH_LONG).show();
-        }
-        else {
-            Intent intent = new Intent(this, CoursesFragment.class);
-            intent.putExtra("json_data", json_string);
+    public void parseJSON(View view) {
+
+        listView = (ListView) findViewById(R.id.listview);
+
+        courseAdapter = new CourseAdapter(this, R.layout.courses_layout);
+        listView.setAdapter(courseAdapter);
+
+        if (json_string == null) {
+            Toast.makeText(getApplicationContext(), "First Get JSON", Toast.LENGTH_LONG).show();
+        } else {
+
+            try {
+                Log.d("log"," Log test");
+                jsonArray = new JSONArray(json_string);
+                int count = 0;
+                String courseName, courseEcts, courseGrade, coursePeriod;
+
+                while (count < jsonArray.length()) {
+                    JSONObject JO = jsonArray.getJSONObject(count);
+                    courseName = JO.getString("name");
+                    courseEcts = JO.getString("ects");
+                    courseGrade = JO.getString("grade");
+                    coursePeriod = JO.getString("period");
+                    CourseModel courseModel = new CourseModel(courseName, courseEcts, courseGrade, coursePeriod);
+                    courseAdapter.add(courseModel);
+                    count++;
+                    Log.d("log"," Log de array row: "+ count +" en de naam: "+courseName);
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } //catch (NullPointerException e) {
+                //TODO nullpointer verhelpen...
+            //}
+
+
         }
     }
 

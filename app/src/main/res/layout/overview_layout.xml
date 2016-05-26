@@ -34,9 +34,10 @@
         android:layout_height="wrap_content"
         android:text="+2"
         android:id="@+id/plusTweeTest"
-        android:layout_alignParentEnd="false"
-        android:layout_marginTop="16dp"
-        android:layout_below="@+id/txtAdvies" />
+        android:layout_marginTop="47dp"
+        android:layout_below="@+id/txtAdvies"
+        android:layout_alignLeft="@+id/txtAdvies"
+        android:layout_alignStart="@+id/txtAdvies" />
 
     <TextView
         android:layout_width="wrap_content"
