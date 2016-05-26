@@ -19,6 +19,8 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import nl.soco.imtpmd.studiebarometer.Models.UserModel;
+
 public class LoginActivity extends AppCompatActivity {
     private static final String DEFAULT = "N/A";
 
@@ -43,13 +45,13 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        bLogin.setOnClickListener(new View.OnClickListener(){
+        bLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final String email = etEmail.getText().toString();
                 final String password = etPassword.getText().toString();
 
-                Response.Listener<String>responseListener = new Response.Listener<String>() {
+                Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
 
@@ -57,10 +59,11 @@ public class LoginActivity extends AppCompatActivity {
                             JSONObject jsonResponse = new JSONObject(response);
                             boolean success = jsonResponse.getBoolean("success");
 
-                            if (success){
+                            if (success) {
                                 String name = jsonResponse.getString("user_name");
-                                //String ww = jsonResponse.getString("user_p");
-                                saveUser(name);
+                                String email = jsonResponse.getString("user_email");
+
+                                saveUser(name, email);
 
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 intent.putExtra("user_name", name);
@@ -92,14 +95,16 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private void saveUser(String name) {
+    private void saveUser(String name, String email) {
         SharedPreferences sharedPreferences = getSharedPreferences("MyData", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt("gebruiker_id", 0);
         editor.putString("gebruiker_naam", name);
-        //editor.putString("gebruiker_ww", ww);
+        editor.putString("gebruiker_email", email);
         editor.commit();
 
+        MainActivity.user.setName(name);
+        MainActivity.user.setEmail(email);
         Toast.makeText(this, "Naam succesvol opgeslagen!", Toast.LENGTH_LONG).show();
     }
 

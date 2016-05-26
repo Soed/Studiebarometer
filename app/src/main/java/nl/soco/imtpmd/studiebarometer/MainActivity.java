@@ -13,17 +13,17 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
+
+import nl.soco.imtpmd.studiebarometer.Models.UserModel;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    public String naam;
+    public static UserModel user = new UserModel();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.app_menu);
-
-        Intent intent = getIntent();
-        naam = intent.getStringExtra("user_name");
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -37,6 +37,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        View v = navigationView.getHeaderView(0);
+        TextView name = (TextView ) v.findViewById(R.id.nameMenuTxt);
+        TextView email = (TextView ) v.findViewById(R.id.emailMenuTxt);
+
+        name.setText(user.getName());
+        email.setText(user.getEmail());
+
         navigationView.getMenu().getItem(0).setChecked(true);
         onNavigationItemSelected(navigationView.getMenu().getItem(0));
 
@@ -45,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -56,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.home, menu);
+
         return true;
     }
 
@@ -105,14 +114,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void logout(){
-        Log.d("Log data:", "Terug naar loginscherm etc");
+        Log.d("Log data:", "Terug naar loginscherm etc.. naam:" + user.getName() + ".. email:" + user.getEmail());
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
         startActivity(intent);
-
-        // Restart
-        //Intent i = getBaseContext().getPackageManager()
-        //        .getLaunchIntentForPackage( getBaseContext().getPackageName() );
-        //i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        //startActivity(i);
     }
 }
