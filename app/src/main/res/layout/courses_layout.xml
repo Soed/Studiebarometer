@@ -3,13 +3,69 @@
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:background="#fff3f3f3">
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Get JSON"
+        android:id="@+id/getJson"
+        android:onClick="getJSON"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Parse JSON"
+        android:id="@+id/parseJson"
+        android:onClick="parseJson"
+        android:layout_below="@+id/getJson"
+        android:layout_centerHorizontal="true" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Courses Layout"
-        android:id="@+id/textView3"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="112dp" />
+        android:text="JSON Appear here"
+        android:id="@+id/textView5"
+        android:layout_marginTop="32dp"
+        android:layout_below="@+id/parseJson"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:id="@+id/tx_name"
+        android:layout_alignParentLeft="true"
+        android:text="Naam"
+        android:gravity="center"
+        android:textAppearance="?android:textAppearanceLarge" />
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:id="@+id/tx_ects"
+        android:layout_toRightOf="@+id/tx_name"
+        android:text="Ects"
+        android:gravity="center"
+        android:textAppearance="?android:textAppearanceLarge" />
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:id="@+id/tx_grade"
+        android:layout_toRightOf="@+id/tx_ects"
+        android:text="Grade"
+        android:gravity="center"
+        android:textAppearance="?android:textAppearanceLarge" />
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:id="@+id/tx_period"
+        android:layout_toRightOf="@+id/tx_grade"
+        android:text="Period"
+        android:gravity="center"
+        android:textAppearance="?android:textAppearanceLarge" />
+
+
 </RelativeLayout>
