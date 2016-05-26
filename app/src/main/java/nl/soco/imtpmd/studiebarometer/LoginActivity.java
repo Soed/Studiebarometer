@@ -113,9 +113,6 @@ public class LoginActivity extends AppCompatActivity {
         String name = sharedPreferences.getString("gebruiker_naam", DEFAULT);
         if (!name.equals(DEFAULT)) {
             Log.d("Log data: ", "Test naam"+ name);
-            //gebruiker.setNaam(name);
-            //toonNaamDialog(); // TODO nog weghalen....
-           // welkom.setText("Welkom bij de Planning Poker app " + gebruiker.getNaam() + "!");
         } else {
 
         }

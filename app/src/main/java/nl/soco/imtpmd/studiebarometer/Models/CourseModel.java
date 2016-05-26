@@ -4,12 +4,12 @@ import java.io.Serializable;
 public class CourseModel implements Serializable {           // WAAROM serializable ????
 
     private String name;
-    private int ects;
-    private int grade;
-    private int period;
+    private String ects;
+    private String grade;
+    private String period;
 
 
-    public CourseModel(String courseName, int ects, int grade, int period){
+    public CourseModel(String courseName, String ects, String grade, String period){
         this.name = courseName;
         this.ects = ects;
         this.grade = grade;
@@ -24,27 +24,27 @@ public class CourseModel implements Serializable {           // WAAROM serializa
         this.name = name;
     }
 
-    public int getEcts() {
+    public String getEcts() {
         return ects;
     }
 
-    public void setEcts(int ects) {
+    public void setEcts(String ects) {
         this.ects = ects;
     }
 
-    public int getGrade() {
+    public String getGrade() {
         return grade;
     }
 
-    public void setGrade(int grade) {
+    public void setGrade(String grade) {
         this.grade = grade;
     }
 
-    public int getPeriod() {
+    public String getPeriod() {
         return period;
     }
 
-    public void setPeriod(int period) {
+    public void setPeriod(String period) {
         this.period = period;
     }
 
