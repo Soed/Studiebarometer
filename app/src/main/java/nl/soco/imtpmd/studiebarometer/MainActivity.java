@@ -2,6 +2,7 @@ package nl.soco.imtpmd.studiebarometer;
 
 import android.app.FragmentManager;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,11 +14,34 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import android.widget.TextView;
 
 import nl.soco.imtpmd.studiebarometer.Models.UserModel;
+import nl.soco.imtpmd.studiebarometer.Models.CourseModel;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    public String naam;
+    String JSON_STRING;
+    String json_string;
+    JSONObject jsonObject;
+    JSONArray jsonArray;
+    CourseAdapter courseAdapter;
+    ListView listView;
     public static UserModel user = new UserModel();
 
     @Override
@@ -46,6 +70,34 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         navigationView.getMenu().getItem(0).setChecked(true);
         onNavigationItemSelected(navigationView.getMenu().getItem(0));
+
+        listView = (ListView)findViewById(R.id.listview);
+
+        courseAdapter = new CourseAdapter(this, R.layout.courses_layout);
+        //TODO hier onder verder...
+        //listView.setAdapter(courseAdapter);
+        try {
+            jsonObject = new JSONObject(json_string);
+            jsonArray = jsonObject.getJSONArray("");
+            int count = 0;
+            String CourseName;
+            int ects, grade, period;
+            while (count<jsonArray.length()) {
+                JSONObject JO = jsonArray.getJSONObject(count);
+                CourseName = JO.getString("name");
+                ects = JO.getInt("ects");
+                grade = JO.getInt("grade");
+                period = JO.getInt("period");
+                CourseModel courseModel = new CourseModel(CourseName, ects, grade, period);
+                courseAdapter.add(courseModel);
+                count++;
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (NullPointerException e){
+            //TODO nullpointer verhelpen...
+        }
 
     }
 
@@ -118,4 +170,67 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
         startActivity(intent);
     }
+
+    public void getJSON (View view){
+        new BackgroundTask().execute();
+    }
+
+    class BackgroundTask extends AsyncTask<Void, Void, String> {
+
+        String json_url;
+
+        @Override
+        protected void onPreExecute() {
+            json_url = "http://fuujokan.nl/subject_lijst.json";
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+            try {
+                URL url = new URL(json_url);
+                HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                StringBuilder stringBuilder = new StringBuilder();
+
+                while ((JSON_STRING = bufferedReader.readLine())!=null ) {
+                    stringBuilder.append(JSON_STRING+"\n");
+                }
+
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return stringBuilder.toString().trim();
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+            super.onProgressUpdate(values);
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            TextView textView = (TextView)findViewById(R.id.textView5);
+            textView.setText(result);
+            json_string = result;
+        }
+    }
+
+    public void parseJSON (View view) {
+        if (json_string==null){
+            Toast.makeText(getApplicationContext(),"First Get JSON", Toast.LENGTH_LONG).show();
+        }
+        else {
+            Intent intent = new Intent(this, CoursesFragment.class);
+            intent.putExtra("json_data", json_string);
+        }
+    }
+
 }

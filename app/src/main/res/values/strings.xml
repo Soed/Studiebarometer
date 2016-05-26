@@ -14,9 +14,9 @@
     <string name="menu_item_drie">drie</string>
     <string name="menu_item_vier">Uitloggen</string>
 
-    <string name="menu_item_image_een">@drawable/ic_home</string>
-    <string name="menu_item_image_twee">@drawable/ic_menu_gallery</string>
-    <string name="menu_item_image_drie">@drawable/ic_menu_slideshow</string>
-    <string name="menu_item_image_vier">@drawable/ic_menu_slideshow</string>
+    <string name="menu_item_image_een"></string>
+    <string name="menu_item_image_twee"></string>
+    <string name="menu_item_image_drie"></string>
+    <string name="menu_item_image_vier"></string>
 
 </resources>
