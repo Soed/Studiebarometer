@@ -63,7 +63,6 @@ public class LoginActivity extends AppCompatActivity {
                             boolean success = jsonResponse.getBoolean("success");
 
                             if (success) {
-                                //TODO id ook toevoegen in php
                                 String id = jsonResponse.getString("user_id");
                                 String name = jsonResponse.getString("user_name");
                                 String email = jsonResponse.getString("user_email");
