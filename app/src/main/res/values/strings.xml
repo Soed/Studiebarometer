@@ -8,15 +8,32 @@
 
     <string name="navigation_drawer_open">Open navigatie</string>
     <string name="navigation_drawer_close">Sluit navigatie</string>
+    <string name="cijfer">Selecteer een vak en vul het behaalde cijfer in om dit vervolgens op te slaan.</string>
 
-    <string name="menu_item_een">Overzicht</string>
-    <string name="menu_item_twee">twee</string>
-    <string name="menu_item_drie">drie</string>
-    <string name="menu_item_vier">Uitloggen</string>
+    <string-array name="course_array">
+        <item>IARCH</item>
+        <item>IIBPM</item>
+        <item>IHBO</item>
+        <item>IOPR1</item>
 
-    <string name="menu_item_image_een"></string>
-    <string name="menu_item_image_twee"></string>
-    <string name="menu_item_image_drie"></string>
-    <string name="menu_item_image_vier"></string>
+        <item>INET</item>
+        <item>IWDR</item>
+        <item>IRDB</item>
+        <item>IIBUI</item>
+
+        <item>IPRODAM</item>
+        <item>IPROMEDT</item>
+        <item>IMUML</item>
+        <item>IOPR2</item>
+
+        <item>IFIT</item>
+        <item>IPOFIT</item>
+        <item>IPOSE</item>
+        <item>IIPXXXX</item>
+
+        <item>IPROV</item>
+        <item>ICOMMP</item>
+        <item>ISLP</item>
+    </string-array>
 
 </resources>

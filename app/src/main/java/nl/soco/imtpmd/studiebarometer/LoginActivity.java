@@ -77,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
 
                             } else {
                                 AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-                                builder.setMessage("Login Failed")
+                                builder.setMessage("Inloggen mislukt!")
                                         .setNegativeButton("Retry", null)
                                         .create()
                                         .show();
@@ -113,7 +113,7 @@ public class LoginActivity extends AppCompatActivity {
         editor.putString("gebruiker_password", password);
         editor.commit();
 
-        Toast.makeText(this, "Naam succesvol opgeslagen!", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Login succesvol opgeslagen!", Toast.LENGTH_LONG).show();
     }
 
     private void getSavedUserLogin() {
@@ -121,11 +121,15 @@ public class LoginActivity extends AppCompatActivity {
         String email = sharedPreferences.getString("gebruiker_email", DEFAULT);
         String password = sharedPreferences.getString("gebruiker_password", DEFAULT);
 
+        setSavedUserLogin(email, password);
+    }
+
+    private void setSavedUserLogin(String email, String password) {
         if (!email.equals(DEFAULT)) {
             etEmail.setText(email, TextView.BufferType.EDITABLE);
             etPassword.setText(password, TextView.BufferType.EDITABLE);
         } else {
-            Log.d("Log data: ", "Geen gegevens! few iqiowhjiogjriogohrquionn g rqehioqgh ngioq");
+            Log.d("Log data: ", "Geen gegevens!");
         }
     }
 }

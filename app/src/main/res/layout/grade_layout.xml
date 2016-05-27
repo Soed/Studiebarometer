@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff3f3f3">
+
+    <TextView
+        android:id="@+id/txtCijfer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="15dp"
+        android:text="@string/cijfer"
+        android:textColor="@color/abc_primary_text_material_light"
+        android:textSize="14sp" />
+
+    <Spinner
+        android:id="@+id/courseSpinner"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/txtCijfer"
+        android:layout_marginTop="16dp" />
+
+    <EditText
+        android:id="@+id/etCijfer"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/courseSpinner"
+        android:layout_marginLeft="16dp"
+        android:layout_toEndOf="@+id/courseSpinner"
+        android:layout_toRightOf="@+id/courseSpinner"
+        android:ems="10"
+        android:inputType="number"
+        android:maxLength="1" />
+
+    <Button
+        android:id="@+id/btnCijferOpslaan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etCijfer"
+        android:layout_marginTop="16dp"
+        android:text="Opslaan" />
+
+
+</RelativeLayout>

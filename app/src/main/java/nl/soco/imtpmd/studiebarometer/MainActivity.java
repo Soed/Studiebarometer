@@ -2,7 +2,6 @@ package nl.soco.imtpmd.studiebarometer;
 
 import android.app.FragmentManager;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,27 +13,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ListAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 
 import nl.soco.imtpmd.studiebarometer.Models.UserModel;
-import nl.soco.imtpmd.studiebarometer.Models.CourseModel;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -113,11 +95,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_overview_layout:
                 fragmentManager.beginTransaction().replace(R.id.content_frame, new OverviewFragment()).commit();
                 break;
-            case R.id.nav_period_layout:
-                fragmentManager.beginTransaction().replace(R.id.content_frame, new PeriodFragment()).commit();
-                break;
             case R.id.nav_courses_layout:
                 fragmentManager.beginTransaction().replace(R.id.content_frame, new CoursesFragment()).commit();
+                break;
+            case R.id.nav_grade_layout:
+                fragmentManager.beginTransaction().replace(R.id.content_frame, new GradeFragment()).commit();
                 break;
             case R.id.nav_logout:
                 logout();
