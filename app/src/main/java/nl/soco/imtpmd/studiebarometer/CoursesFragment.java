@@ -26,7 +26,6 @@ import java.net.URL;
 
 import nl.soco.imtpmd.studiebarometer.Models.CourseModel;
 
-
 /**
  * Created by Collin on 19-4-2016.
  */
@@ -134,10 +133,7 @@ public class CoursesFragment extends Fragment {
 
             } catch (JSONException e) {
                 e.printStackTrace();
-            } //catch (NullPointerException e) {
-            //TODO nullpointer verhelpen...
-            //}
-
+            }
 
         }
     }

@@ -48,7 +48,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 RegisterActivity.this.startActivity(intent);
                             } else {
                                 AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
-                                builder.setMessage("Register Failed! Email already exists.")
+                                builder.setMessage("Oeps! Het ingevoerde e-mailadres is al in gebruik.")
                                         .setNegativeButton("Retry", null)
                                         .create()
                                         .show();
