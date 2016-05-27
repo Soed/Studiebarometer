@@ -32,7 +32,6 @@ import nl.soco.imtpmd.studiebarometer.Models.CourseModel;
 public class CoursesFragment extends Fragment {
     View myView;
 
-    public String naam;
     private String JSON_STRING;
     private String json_string;
     private JSONArray jsonArray;
@@ -114,7 +113,6 @@ public class CoursesFragment extends Fragment {
         } else {
 
             try {
-                Log.d("log", " Log test");
                 jsonArray = new JSONArray(json_string);
                 int count = 0;
                 String courseName, courseEcts, courseGrade, coursePeriod;
