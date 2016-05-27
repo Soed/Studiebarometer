@@ -65,8 +65,8 @@ public class OverviewFragment extends Fragment {
 
         setData(currentEcts, disabledEcts, unknownEcts);
 
-        //Button fab = (Button) findViewById(R.id.plusTweeTest);
-        //fab.setVisibility(View.GONE);
+        Button plustweeee = (Button) myView.findViewById(R.id.plusTweeTest);
+        plustweeee.setVisibility(View.GONE);
 
         Button fab = (Button) myView.findViewById(R.id.plusTweeTest);
         fab.setOnClickListener(new View.OnClickListener() {
