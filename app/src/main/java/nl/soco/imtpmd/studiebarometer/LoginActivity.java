@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -19,23 +20,26 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import nl.soco.imtpmd.studiebarometer.Models.UserModel;
-
 public class LoginActivity extends AppCompatActivity {
     private static final String DEFAULT = "N/A";
+    EditText etEmail;
+    EditText etPassword;
+    Button bLogin;
+    Button bRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        etEmail = (EditText) findViewById(R.id.etEmail);
+        etPassword = (EditText) findViewById(R.id.etPassword);
+        bLogin = (Button) findViewById(R.id.bLogin);
+        bRegister = (Button) findViewById(R.id.bRegister);
 
-        final EditText etEmail = (EditText) findViewById(R.id.etEmail);
-        final EditText etPassword = (EditText) findViewById(R.id.etPassword);
 
-        final Button bLogin = (Button) findViewById(R.id.bLogin);
-        final Button bRegister = (Button) findViewById(R.id.bRegister);
+        getSavedUserLogin();
 
-        bRegister.setOnClickListener(new View.OnClickListener(){
+        bRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent registerIntent = new Intent(LoginActivity.this, RegisterActivity.class);
@@ -63,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
                                 String name = jsonResponse.getString("user_name");
                                 String email = jsonResponse.getString("user_email");
 
-                                saveUser(name, email);
+                                setUser(name, email);
 
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 intent.putExtra("user_name", name);
@@ -86,6 +90,8 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 };
 
+                saveUserLogin(email, password);
+
                 LoginRequest loginRequest = new LoginRequest(email, password, responseListener);
                 RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
                 queue.add(loginRequest);
@@ -95,26 +101,31 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private void saveUser(String name, String email) {
-        SharedPreferences sharedPreferences = getSharedPreferences("MyData", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt("gebruiker_id", 0);
-        editor.putString("gebruiker_naam", name);
-        editor.putString("gebruiker_email", email);
-        editor.commit();
-
+    private void setUser(String name, String email) {
         MainActivity.user.setName(name);
         MainActivity.user.setEmail(email);
+    }
+
+    private void saveUserLogin(String email, String password) {
+        SharedPreferences sharedPreferences = getSharedPreferences("LoginData", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("gebruiker_email", email);
+        editor.putString("gebruiker_password", password);
+        editor.commit();
+
         Toast.makeText(this, "Naam succesvol opgeslagen!", Toast.LENGTH_LONG).show();
     }
 
-    private void ophalenNaam() {
-        SharedPreferences sharedPreferences = getSharedPreferences("MyData", Context.MODE_PRIVATE);
-        String name = sharedPreferences.getString("gebruiker_naam", DEFAULT);
-        if (!name.equals(DEFAULT)) {
-            Log.d("Log data: ", "Test naam"+ name);
-        } else {
+    private void getSavedUserLogin() {
+        SharedPreferences sharedPreferences = getSharedPreferences("LoginData", Context.MODE_PRIVATE);
+        String email = sharedPreferences.getString("gebruiker_email", DEFAULT);
+        String password = sharedPreferences.getString("gebruiker_password", DEFAULT);
 
+        if (!email.equals(DEFAULT)) {
+            etEmail.setText(email, TextView.BufferType.EDITABLE);
+            etPassword.setText(password, TextView.BufferType.EDITABLE);
+        } else {
+            Log.d("Log data: ", "Geen gegevens! few iqiowhjiogjriogohrquionn g rqehioqgh ngioq");
         }
     }
 }
