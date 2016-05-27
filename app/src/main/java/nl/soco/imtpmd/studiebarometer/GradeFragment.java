@@ -70,7 +70,7 @@ public class GradeFragment extends Fragment {
     }
 
     private void saveGradeDB() {
-        Toast.makeText(getActivity().getBaseContext(), "saveGradeDB gestart!!!!", Toast.LENGTH_SHORT).show();
+        //TODO wegschijven naar database...
     }
 
 }

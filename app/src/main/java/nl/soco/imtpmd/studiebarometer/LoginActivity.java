@@ -36,7 +36,6 @@ public class LoginActivity extends AppCompatActivity {
         bLogin = (Button) findViewById(R.id.bLogin);
         bRegister = (Button) findViewById(R.id.bRegister);
 
-
         getSavedUserLogin();
 
         bRegister.setOnClickListener(new View.OnClickListener() {
@@ -64,10 +63,12 @@ public class LoginActivity extends AppCompatActivity {
                             boolean success = jsonResponse.getBoolean("success");
 
                             if (success) {
+                                //TODO id ook toevoegen in php
+                                String id = jsonResponse.getString("user_id");
                                 String name = jsonResponse.getString("user_name");
                                 String email = jsonResponse.getString("user_email");
 
-                                setUser(name, email);
+                                setUser(id, name, email);
 
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 intent.putExtra("user_name", name);
@@ -101,9 +102,11 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private void setUser(String name, String email) {
+    private void setUser(String id, String name, String email) {
+        MainActivity.user.setId(Integer.parseInt(id));
         MainActivity.user.setName(name);
         MainActivity.user.setEmail(email);
+        Log.d("Log data: "," id nu ook... " + id);
     }
 
     private void saveUserLogin(String email, String password) {
