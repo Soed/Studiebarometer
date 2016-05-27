@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -36,13 +37,9 @@ import nl.soco.imtpmd.studiebarometer.Models.UserModel;
 import nl.soco.imtpmd.studiebarometer.Models.CourseModel;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    public String naam;
-    private String JSON_STRING;
-    private String json_string;
-    private JSONArray jsonArray;
-    private CourseAdapter courseAdapter;
-    ListView listView;
+
     public static UserModel user = new UserModel();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,97 +137,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
-    }
-
-    public void getJSON(View view) {
-        new BackgroundTask().execute();
-    }
-
-    class BackgroundTask extends AsyncTask<Void, Void, String> {
-
-        String json_url;
-
-        @Override
-        protected void onPreExecute() {
-            json_url = "http://fuujokan.nl/subject_lijst.json";
-        }
-
-        @Override
-        protected String doInBackground(Void... params) {
-            try {
-                URL url = new URL(json_url);
-                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                InputStream inputStream = httpURLConnection.getInputStream();
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-                StringBuilder stringBuilder = new StringBuilder();
-
-                while ((JSON_STRING = bufferedReader.readLine()) != null) {
-                    stringBuilder.append(JSON_STRING + "\n");
-                }
-
-                bufferedReader.close();
-                inputStream.close();
-                httpURLConnection.disconnect();
-                return stringBuilder.toString().trim();
-
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        @Override
-        protected void onProgressUpdate(Void... values) {
-            super.onProgressUpdate(values);
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            //TextView textView = (TextView) findViewById(R.id.textView5);
-            //textView.setText(result);
-            json_string = result;
-        }
-    }
-
-    public void parseJSON(View view) {
-
-        listView = (ListView) findViewById(R.id.listview);
-
-        courseAdapter = new CourseAdapter(this, R.layout.courses_layout);
-        listView.setAdapter(courseAdapter);
-
-        if (json_string == null) {
-            Toast.makeText(getApplicationContext(), "First Get JSON", Toast.LENGTH_LONG).show();
-        } else {
-
-            try {
-                Log.d("log"," Log test");
-                jsonArray = new JSONArray(json_string);
-                int count = 0;
-                String courseName, courseEcts, courseGrade, coursePeriod;
-
-                while (count < jsonArray.length()) {
-                    JSONObject JO = jsonArray.getJSONObject(count);
-                    courseName = JO.getString("name");
-                    courseEcts = JO.getString("ects");
-                    courseGrade = JO.getString("grade");
-                    coursePeriod = JO.getString("period");
-                    CourseModel courseModel = new CourseModel(courseName, courseEcts, courseGrade, coursePeriod);
-                    courseAdapter.add(courseModel);
-                    count++;
-                    Log.d("log"," Log de array row: "+ count +" en de naam: "+courseName);
-                }
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } //catch (NullPointerException e) {
-                //TODO nullpointer verhelpen...
-            //}
-
-
-        }
     }
 
 }

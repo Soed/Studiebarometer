@@ -13,11 +13,12 @@
         android:layout_height="wrap_content"
         android:text="@string/welkom"
         android:id="@+id/txtWelkom"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="15dp"
         android:textSize="14sp"
-        android:textColor="@color/abc_primary_text_material_light" />
+        android:textColor="@color/abc_primary_text_material_light"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <com.github.mikephil.charting.charts.PieChart
         android:layout_width="match_parent"
@@ -34,21 +35,20 @@
         android:layout_height="wrap_content"
         android:text="+2"
         android:id="@+id/plusTweeTest"
-        android:layout_marginTop="47dp"
+        android:layout_marginTop="46dp"
         android:layout_below="@+id/txtAdvies"
-        android:layout_alignLeft="@+id/txtAdvies"
-        android:layout_alignStart="@+id/txtAdvies" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/txtAdvies"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="16dp"
         android:textSize="14sp"
-        android:layout_below="@+id/chart"
         android:text="ol"
-        android:textColor="@color/abc_primary_text_material_light" />
+        android:textColor="@color/abc_primary_text_material_light"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
